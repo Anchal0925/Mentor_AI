@@ -10,7 +10,7 @@ export function Sidebar() {
 
   const navItems = [
     { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
-    { label: 'Path', icon: Compass, path: '/path' },
+    { label: 'Paths', icon: Compass, path: '/paths' },
     { label: 'Progress', icon: BarChart2, path: '/progress' },
     { label: 'Problems', icon: CheckSquare, path: '/problems' },
   ];

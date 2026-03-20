@@ -33,42 +33,43 @@
 }
 
 :root {
-  /* TIERED ELEVATION SYSTEM - Black with grey tint (Scrimba inspired) */
-  --bg-primary:       #0a0a0c; /* Tier 1: Deepest black with slight grey tint */
-  --bg-surface:       #151518; /* Tier 2: Sidebar, TopNav */
-  --bg-elevated:      #212124; /* Tier 3: Cards — distinctly grey-tinted */
-  --bg-code:          #050507; /* Tier 4: Editor */
+  /* TIERED ELEVATION SYSTEM - Charcoal-black, cool tinted */
+  --bg-primary:       #06080c; /* Tier 1: Deep background */
+  --bg-surface:       #0f141a; /* Tier 2: Navigation surfaces */
+  --bg-elevated:      #161d26; /* Tier 3: Cards and raised panels */
+  --bg-code:          #05070b; /* Tier 4: Editor canvas */
 
-  /* BORDERS - Crisp, subtle grey-tinted separation */
-  --border:           #2e2e32; 
-  --border-hover:     #43434a; 
-  --border-active:    #4ade80; 
+  /* BORDERS - Muted steel tint */
+  --border:           #2a323d;
+  --border-hover:     #3b4756;
+  --border-active:    #0bb389;
 
-  /* BRAND ACCENT - Emerald Green */
-  --accent-green:     #4ade80;
-  --accent-green-dim: #166534;
-  --accent-green-bg:  rgba(74, 222, 128, 0.08);
+  /* BRAND ACCENT - Sophisticated emerald-teal */
+  --accent-green:     #0bb389;
+  --accent-green-dim: #0b4f3e;
+  --accent-green-bg:  rgba(11, 179, 137, 0.12);
 
   /* FUNCTIONAL COLORS */
-  --accent-blue:      #3b82f6;
-  --accent-yellow:    #fbbf24;
-  --accent-red:       #ef4444;
-  --accent-teal:      #14b8a6;
-  --accent-purple:    #8b5cf6;
+  --accent-blue:      #4d7cff;
+  --accent-yellow:    #d6a13b;
+  --accent-red:       #d95d5d;
+  --accent-teal:      #2ab7a9;
+  --accent-purple:    #8570d1;
 
-  /* TEXT SYSTEM - Cool grey tint */
-  --text-primary:     #f3f4f6; /* Gray 100 */
-  --text-secondary:   #9ca3af; /* Gray 400 */
-  --text-muted:       #6b7280; /* Gray 500 */
+  /* TEXT SYSTEM - Soft, desaturated slate */
+  --text-primary:     #e6eaf0;
+  --text-secondary:   #a1adbd;
+  --text-muted:       #6f7b8e;
 
-  --tag-bg:           rgba(255,255,255,0.06);
-  --tag-border:       rgba(255,255,255,0.12);
+  --tag-bg:           rgba(151, 170, 191, 0.12);
+  --tag-border:       rgba(151, 170, 191, 0.24);
 }
 
 body {
   background-color: var(--bg-primary);
-  /* Wide, subtle greyish-tint radial gradient mimicking the Scrimba hero glow */
-  background-image: radial-gradient(100% 100% at 50% 0%, #28282c 0%, var(--bg-primary) 70%);
+  background-image:
+    radial-gradient(120% 85% at 50% -10%, rgba(236, 240, 247, 0.24) 0%, rgba(56, 64, 77, 0.38) 24%, rgba(14, 18, 26, 0.72) 52%, rgba(6, 8, 12, 0.98) 74%),
+    linear-gradient(180deg, #11151d 0%, #080b12 38%, #05070b 100%);
   background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-body);

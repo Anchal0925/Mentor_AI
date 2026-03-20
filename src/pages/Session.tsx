@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Editor from '@monaco-editor/react';
 import {
@@ -47,6 +47,8 @@ const MOCK_MESSAGES: Message[] = [
 
 export default function Session() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const sessionId = id ?? 'new';
 
   /* ── Timer ── */
   const [seconds, setSeconds] = useState(0);
@@ -252,7 +254,13 @@ export default function Session() {
               <Play className="w-4 h-4 fill-current" /> Run Code
             </Button>
             <span className="font-mono text-[11px] text-muted hidden md:block">⌘ + Enter to Run</span>
-            <Button variant="ghost-green" className="text-sm px-5 py-2 h-9">Submit</Button>
+            <Button
+              variant="ghost-green"
+              className="text-sm px-5 py-2 h-9"
+              onClick={() => navigate(`/session/${sessionId}/feedback`)}
+            >
+              Submit
+            </Button>
           </div>
 
           {/* Collapsible Console */}
