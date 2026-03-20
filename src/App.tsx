@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Problems from './pages/Problems';
 import Session from './pages/Session';
 import Progress from './pages/Progress';
+import LearningPath from './pages/LearningPath';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/problems" element={<Problems />} />
           <Route path="/progress" element={<Progress />} />
+          <Route path="/path" element={<LearningPath />} />
         </Route>
       </Routes>
     </BrowserRouter>
