@@ -1,42 +1,39 @@
-import React from 'react';
-import { RadarChart } from '../components/dashboard/RadarChart';
-import { BehaviorFlags } from '../components/dashboard/BehaviorFlags';
-import { SessionTimeline } from '../components/dashboard/SessionTimeline';
-import { ConceptGraph } from '../components/dashboard/ConceptGraph';
-import { SessionReplay } from '../components/dashboard/SessionReplay';
+import { motion } from 'framer-motion';
+import { ProgressHeader } from '../components/progress/ProgressHeader';
+import { SkillRadar } from '../components/progress/SkillRadar';
+import { BehavioralFlags } from '../components/progress/BehavioralFlags';
+import { ThinkingPattern } from '../components/progress/ThinkingPattern';
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
+};
 
 export default function Progress() {
   return (
-    <div className="p-8 max-w-7xl mx-auto flex flex-col gap-8 pb-16">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-display font-semibold text-primary">Progress & Memory Dashboard</h1>
-        <p className="text-secondary font-body">Visualize your mastery, behavioral patterns, and session history.</p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column: Skill Profile & Replay */}
-        <div className="lg:col-span-2 flex flex-col gap-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[400px]">
-            <RadarChart />
-            <ConceptGraph />
-          </div>
-          
-          <div className="mt-8">
-            <BehaviorFlags />
-          </div>
-
-          <div className="mt-8">
-            <SessionReplay />
-          </div>
-        </div>
-
-        {/* Right Column: Timeline */}
-        <div className="lg:col-span-1">
-          <div className="sticky top-[80px]">
-            <SessionTimeline />
-          </div>
-        </div>
-      </div>
+    <div className="max-w-7xl mx-auto px-6 py-8">
+      <ProgressHeader />
+      <motion.div
+        variants={stagger}
+        initial="hidden"
+        animate="show"
+        className="grid grid-cols-1 lg:grid-cols-3 gap-6"
+      >
+        <motion.div variants={fadeUp} className="col-span-1 lg:col-span-2">
+          <SkillRadar />
+        </motion.div>
+        <motion.div variants={fadeUp} className="col-span-1">
+          <BehavioralFlags />
+        </motion.div>
+        <motion.div variants={fadeUp} className="col-span-1 lg:col-span-3">
+          <ThinkingPattern />
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
