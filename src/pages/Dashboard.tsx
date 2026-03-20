@@ -4,18 +4,10 @@ import { Card } from '../components/ui/Card';
 import { Button } from '../components/ui/Button';
 import { Tabs } from '../components/ui/Tabs';
 import { Badge } from '../components/ui/Badge';
+import { ContributionGraph } from '../components/dashboard/ContributionGraph';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('recommended');
-
-  const githubGrid = Array.from({ length: 28 }).map((_, i) => (
-    <div
-      key={i}
-      className={`w-3 h-3 rounded-[3px] ${
-        Math.random() > 0.8 ? 'bg-accent-green' : Math.random() > 0.5 ? 'bg-accent-green/30' : 'bg-primary'
-      }`}
-    />
-  ));
 
   const problems = [
     { id: 1, title: 'Lowest Common Ancestor', desc: 'Find the lowest common ancestor of two nodes in a BST.', tag: 'TREES', diff: 'MEDIUM', diffColor: 'text-accent-yellow', time: '~45m', type: 'RECOMMENDED' },
@@ -36,13 +28,27 @@ export default function Dashboard() {
       {/* Metrics Row */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card 1: Streak */}
-        <Card className="flex flex-col justify-between min-h-[140px]">
-          <div className="flex items-center gap-2 mb-4">
-            <Flame className="w-[18px] h-[18px] text-accent-yellow" />
-            <span className="font-display font-semibold text-lg text-primary">12 Days Streak</span>
+        <Card className="flex flex-col justify-between min-h-[140px] col-span-1 md:col-span-1 lg:col-span-1 border-accent-green/20">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Flame className="w-[18px] h-[18px] text-accent-yellow" />
+              <span className="font-display font-semibold text-lg text-primary">12 Days Streak</span>
+            </div>
           </div>
-          <div className="grid grid-cols-7 gap-1.5 w-fit">
-            {githubGrid}
+          <div className="w-full relative">
+            <ContributionGraph />
+            {/* Legend placed completely at bottom right */}
+            <div className="flex items-center gap-1.5 justify-end mt-3">
+              <span className="font-mono text-[9px] text-muted">Less</span>
+              <div className="flex gap-[2px]">
+                <div className="w-[10px] h-[10px] rounded-[1px] bg-surface border border-border/50" />
+                <div className="w-[10px] h-[10px] rounded-[1px] bg-accent-green/30" />
+                <div className="w-[10px] h-[10px] rounded-[1px] bg-accent-green/50" />
+                <div className="w-[10px] h-[10px] rounded-[1px] bg-accent-green/80" />
+                <div className="w-[10px] h-[10px] rounded-[1px] bg-accent-green shadow-[0_0_8px_rgba(74,222,128,0.4)] border border-accent-green/50" />
+              </div>
+              <span className="font-mono text-[9px] text-muted">More</span>
+            </div>
           </div>
         </Card>
 
