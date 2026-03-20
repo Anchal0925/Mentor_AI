@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import MainLayout from './components/layout/MainLayout';
+import AppLayout from './components/layout/AppLayout';
 import Landing from './pages/Landing';
 import Onboarding from './pages/Onboarding';
 import Dashboard from './pages/Dashboard';
@@ -17,8 +17,8 @@ function App() {
         <Route path="/session/:id" element={<Session />} />
         <Route path="/session/new" element={<Session />} />
 
-        {/* Dashboard Pages (With Navbar+Sidebar) */}
-        <Route element={<MainLayout />}>
+        {/* Dashboard Pages (With Global Shell) */}
+        <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/problems" element={<Problems />} />
           <Route path="/progress" element={<Progress />} />
