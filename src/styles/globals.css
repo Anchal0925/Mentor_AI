@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-code: var(--bg-code);
+
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-border-active: var(--border-active);
+
+  --color-accent-green: var(--accent-green);
+  --color-accent-green-dim: var(--accent-green-dim);
+  --color-accent-green-bg: var(--accent-green-bg);
+
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-red: var(--accent-red);
+  --color-accent-teal: var(--accent-teal);
+  --color-accent-purple: var(--accent-purple);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-tag-bg: var(--tag-bg);
+  --color-tag-border: var(--tag-border);
+
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  /* TIERED ELEVATION SYSTEM - Black with grey tint (Scrimba inspired) */
+  --bg-primary:       #0a0a0c; /* Tier 1: Deepest black with slight grey tint */
+  --bg-surface:       #151518; /* Tier 2: Sidebar, TopNav */
+  --bg-elevated:      #212124; /* Tier 3: Cards — distinctly grey-tinted */
+  --bg-code:          #050507; /* Tier 4: Editor */
+
+  /* BORDERS - Crisp, subtle grey-tinted separation */
+  --border:           #2e2e32; 
+  --border-hover:     #43434a; 
+  --border-active:    #4ade80; 
+
+  /* BRAND ACCENT - Emerald Green */
+  --accent-green:     #4ade80;
+  --accent-green-dim: #166534;
+  --accent-green-bg:  rgba(74, 222, 128, 0.08);
+
+  /* FUNCTIONAL COLORS */
+  --accent-blue:      #3b82f6;
+  --accent-yellow:    #fbbf24;
+  --accent-red:       #ef4444;
+  --accent-teal:      #14b8a6;
+  --accent-purple:    #8b5cf6;
+
+  /* TEXT SYSTEM - Cool grey tint */
+  --text-primary:     #f3f4f6; /* Gray 100 */
+  --text-secondary:   #9ca3af; /* Gray 400 */
+  --text-muted:       #6b7280; /* Gray 500 */
+
+  --tag-bg:           rgba(255,255,255,0.06);
+  --tag-border:       rgba(255,255,255,0.12);
+}
+
+body {
+  background-color: var(--bg-primary);
+  /* Wide, subtle greyish-tint radial gradient mimicking the Scrimba hero glow */
+  background-image: radial-gradient(100% 100% at 50% 0%, #28282c 0%, var(--bg-primary) 70%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
