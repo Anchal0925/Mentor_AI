@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
 import Landing from './pages/Landing';
+import Onboarding from './pages/Onboarding';
 import Dashboard from './pages/Dashboard';
 import Problems from './pages/Problems';
 import Session from './pages/Session';
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         {/* Full Viewport Pages (No Navbar/Sidebar) */}
         <Route path="/" element={<Landing />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/session/:id" element={<Session />} />
         <Route path="/session/new" element={<Session />} />
 
