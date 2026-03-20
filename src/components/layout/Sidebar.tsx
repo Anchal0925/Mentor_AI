@@ -1,83 +1,92 @@
+import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, List, BarChart2, Plus, Settings, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { LayoutDashboard, Compass, BarChart2, CheckSquare, Plus, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 
-export default function Sidebar() {
+export function Sidebar() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   const navItems = [
-    { label: 'Dashboard', icon: Home, path: '/dashboard' },
-    { label: 'Problems Browser', icon: List, path: '/problems' },
-    { label: 'Progress & Memory', icon: BarChart2, path: '/progress' },
+    { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
+    { label: 'Path', icon: Compass, path: '/path' },
+    { label: 'Progress', icon: BarChart2, path: '/progress' },
+    { label: 'Problems', icon: CheckSquare, path: '/problems' },
   ];
 
   return (
-    <aside className="w-[210px] fixed top-[56px] bottom-0 left-0 bg-surface border-r border-border flex flex-col z-40">
-      <div className="flex-1 py-4 flex flex-col gap-1 overflow-y-auto">
+    <motion.aside
+      animate={{ width: isCollapsed ? 72 : 240 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      className="h-full bg-surface border-r border-border flex flex-col relative shrink-0 z-40"
+    >
+      {/* Collapse Toggle */}
+      <button
+        onClick={() => setIsCollapsed(!isCollapsed)}
+        className="absolute -right-3 top-6 w-6 h-6 bg-surface border border-border rounded-full flex items-center justify-center text-muted hover:text-primary transition-colors hover:border-border-hover z-50"
+      >
+        {isCollapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
+      </button>
+
+      {/* Navigation Links */}
+      <div className="flex-1 py-6 flex flex-col gap-1 overflow-y-auto overflow-x-hidden">
         {navItems.map((item) => {
           const isActive = location.pathname.startsWith(item.path);
+          const Icon = item.icon;
           return (
             <Link
               key={item.path}
               to={item.path}
-              className={`flex items-center gap-3 px-4 h-10 group transition-colors ${
+              className={`flex items-center h-10 transition-colors mx-3 rounded-md group ${
                 isActive 
-                  ? 'bg-accent-green-bg text-primary border-l-3 border-accent-green'
-                  : 'text-secondary hover:text-primary hover:bg-white/5 border-l-3 border-transparent'
+                  ? 'bg-accent-green-bg text-primary border-l-[3px] border-l-accent-green' 
+                  : 'text-secondary hover:text-primary hover:bg-white/5 border-l-[3px] border-transparent'
               }`}
             >
-              <item.icon className="w-4 h-4" />
-              <span className="font-medium text-sm">{item.label}</span>
+              <div className="w-[48px] h-full flex items-center justify-center shrink-0">
+                <Icon className={`w-[18px] h-[18px] transition-colors ${isActive ? 'text-accent-green' : 'group-hover:text-primary'}`} />
+              </div>
+              <AnimatePresence>
+                {!isCollapsed && (
+                  <motion.span
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: 'auto' }}
+                    exit={{ opacity: 0, width: 0 }}
+                    className="font-medium text-[13px] whitespace-nowrap overflow-hidden pr-3"
+                  >
+                    {item.label}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </Link>
           );
         })}
-
-        <div className="mt-6 mb-2 px-4 text-xs font-mono text-muted uppercase tracking-wider">
-          Learning Paths
-        </div>
-        
-        {/* Expandable Example Item */}
-        <div className="flex flex-col">
-          <button className="flex items-center justify-between px-4 h-10 text-secondary hover:text-primary hover:bg-white/5 transition-colors border-l-3 border-transparent">
-            <div className="flex items-center gap-3">
-              <ChevronRight className="w-4 h-4" />
-              <span className="font-medium text-sm">DSA Online</span>
-            </div>
-          </button>
-          
-          <div className="flex flex-col py-1">
-            <div className="flex items-center justify-between pl-11 pr-4 h-8 text-secondary hover:text-primary hover:bg-white/5 cursor-pointer">
-              <span className="text-sm">Arrays & AI</span>
-              <div className="w-10 h-[3px] bg-border rounded-full overflow-hidden">
-                <div className="h-full bg-accent-green w-3/4"></div>
-              </div>
-            </div>
-            <div className="flex items-center justify-between pl-11 pr-4 h-8 text-secondary hover:text-primary hover:bg-white/5 cursor-pointer">
-              <span className="text-sm">Strings</span>
-              <div className="w-10 h-[3px] bg-border rounded-full overflow-hidden">
-                <div className="h-full bg-accent-green w-1/4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <div className="p-4 border-t border-border mt-auto shrink-0 flex flex-col gap-2">
-        <Link
-          to="/settings"
-          className="flex items-center gap-3 px-4 h-10 text-secondary hover:text-primary hover:bg-white/5 transition-colors rounded-md"
-        >
-          <Settings className="w-4 h-4" />
-          <span className="font-medium text-sm">Settings</span>
-        </Link>
-        <button 
+      {/* Bottom Pinned CTA */}
+      <div className="p-3 border-t border-border shrink-0">
+        <button
           onClick={() => navigate('/session/new')}
-          className="w-full flex items-center justify-center gap-2 h-10 bg-accent-green text-black rounded-lg font-display font-semibold transition-transform hover:brightness-110 active:scale-95"
+          title="New Session"
+          className={`h-11 bg-accent-green text-black rounded-lg font-display font-semibold transition-transform hover:brightness-110 active:scale-95 flex items-center justify-center gap-2 overflow-hidden mx-auto ${
+            isCollapsed ? 'w-11' : 'w-full px-4'
+          }`}
         >
-          <Plus className="w-4 h-4" />
-          New Session
+          {isCollapsed ? <Play className="w-[18px] h-[18px] fill-current" /> : (
+            <>
+              <Plus className="w-4 h-4 shrink-0" />
+              <motion.span
+                initial={{ opacity: isCollapsed ? 0 : 1 }}
+                animate={{ opacity: isCollapsed ? 0 : 1 }}
+                className="whitespace-nowrap flex-1 text-left whitespace-nowrap overflow-hidden"
+              >
+                New Session
+              </motion.span>
+            </>
+          )}
         </button>
       </div>
-    </aside>
+    </motion.aside>
   );
 }
