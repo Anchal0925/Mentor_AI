@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 export function SessionTimeline() {
@@ -14,7 +15,11 @@ export function SessionTimeline() {
         {history.map((item, index) => (
           <div key={item.id} className="relative">
             <div className="absolute -left-[21px] top-1 w-3 h-3 rounded-full bg-surface border-2 border-accent-green"></div>
-            <div className="bg-elevated border border-border rounded-lg p-4 cursor-pointer hover:border-border-hover transition-colors group">
+            <motion.div
+              whileHover={{ y: -2, scale: 1.005 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="bg-elevated border border-border rounded-lg p-4 cursor-pointer hover:border-border-hover hover:bg-[#1b222d] transition-colors duration-300 group"
+            >
               <div className="flex justify-between items-start mb-2">
                 <h3 className="font-medium text-primary group-hover:text-accent-green transition-colors">{item.title}</h3>
                 <span className="font-mono text-[11px] text-muted">{item.date}</span>
@@ -27,7 +32,7 @@ export function SessionTimeline() {
                   {item.flag}
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
         ))}
       </div>
