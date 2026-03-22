@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-code: var(--bg-code);
+
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-border-active: var(--border-active);
+
+  --color-accent-green: var(--accent-green);
+  --color-accent-green-dim: var(--accent-green-dim);
+  --color-accent-green-bg: var(--accent-green-bg);
+
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-yellow: var(--accent-yellow);
+  --color-accent-red: var(--accent-red);
+  --color-accent-teal: var(--accent-teal);
+  --color-accent-purple: var(--accent-purple);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-tag-bg: var(--tag-bg);
+  --color-tag-border: var(--tag-border);
+
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  /* TIERED ELEVATION SYSTEM - Charcoal-black, cool tinted */
+  --bg-primary:       #06080c; /* Tier 1: Deep background */
+  --bg-surface:       #0f141a; /* Tier 2: Navigation surfaces */
+  --bg-elevated:      #161d26; /* Tier 3: Cards and raised panels */
+  --bg-code:          #05070b; /* Tier 4: Editor canvas */
+
+  /* BORDERS - Muted steel tint */
+  --border:           #2a323d;
+  --border-hover:     #3b4756;
+  --border-active:    #0bb389;
+
+  /* BRAND ACCENT - Sophisticated emerald-teal */
+  --accent-green:     #0bb389;
+  --accent-green-dim: #0b4f3e;
+  --accent-green-bg:  rgba(11, 179, 137, 0.12);
+
+  /* FUNCTIONAL COLORS */
+  --accent-blue:      #4d7cff;
+  --accent-yellow:    #d6a13b;
+  --accent-red:       #d95d5d;
+  --accent-teal:      #2ab7a9;
+  --accent-purple:    #8570d1;
+
+  /* TEXT SYSTEM - Soft, desaturated slate */
+  --text-primary:     #e6eaf0;
+  --text-secondary:   #a1adbd;
+  --text-muted:       #6f7b8e;
+
+  --tag-bg:           rgba(151, 170, 191, 0.12);
+  --tag-border:       rgba(151, 170, 191, 0.24);
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(120% 85% at 50% -10%, rgba(236, 240, 247, 0.24) 0%, rgba(56, 64, 77, 0.38) 24%, rgba(14, 18, 26, 0.72) 52%, rgba(6, 8, 12, 0.98) 74%),
+    linear-gradient(180deg, #11151d 0%, #080b12 38%, #05070b 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
