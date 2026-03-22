@@ -9,6 +9,8 @@ import {
 import { Tabs } from '../components/ui/Tabs';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { Group, Panel } from 'react-resizable-panels';
+import { ResizeHandle } from '../components/ui/ResizeHandle';
 import { progress as progressApi, hintScore as hintScoreApi } from '../lib/api';
 import { useUser } from '../context/UserContext';
 
@@ -193,10 +195,10 @@ export default function Session() {
       </div>
 
       {/* ── THE 3-PANEL GRID ── */}
-      <div className="flex-1 grid grid-cols-[280px_1fr_300px] overflow-hidden">
+      <Group orientation="horizontal" className="flex-1 overflow-hidden" id="mentormind-ide-layout">
 
         {/* ════ LEFT PANEL: Problem ════ */}
-        <div className="bg-surface border-r border-border flex flex-col h-full overflow-hidden">
+        <Panel defaultSize={20} minSize={15} maxSize={40} className="bg-surface flex flex-col h-full overflow-hidden">
           <div className="border-b border-border px-4 pt-3">
             <Tabs
               tabs={[
@@ -250,10 +252,14 @@ export default function Session() {
               <p className="text-secondary text-sm">Submit your solution first to unlock the full explanation.</p>
             )}
           </div>
-        </div>
+        </Panel>
+
+        <ResizeHandle id="handle-1" />
 
         {/* ════ CENTER PANEL: Monaco + Console ════ */}
-        <div className="flex flex-col h-full min-w-0 bg-code">
+        <Panel defaultSize={55} minSize={30} className="flex flex-col h-full min-w-0 bg-code">
+          <Group orientation="vertical">
+            <Panel defaultSize={70} minSize={20} className="flex flex-col h-full min-w-0 relative">
           {/* VS Code Tab Bar */}
           <div className="h-[40px] bg-surface border-b border-border flex items-center pl-2 shrink-0">
             <div className="flex items-center gap-2 px-4 py-2 bg-code border-t-2 border-t-accent-green text-primary text-[13px] font-mono h-full">
@@ -318,16 +324,13 @@ export default function Session() {
             </Button>
           </div>
 
-          {/* Collapsible Console */}
-          <AnimatePresence initial={false}>
-            {isConsoleOpen && (
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: 200 }}
-                exit={{ height: 0 }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-primary border-t border-border flex flex-col overflow-hidden shrink-0"
-              >
+            </Panel>
+
+            {isConsoleOpen && <ResizeHandle id="handle-console" direction="horizontal" />}
+
+            {/* Collapsible Console */}
+            {isConsoleOpen ? (
+              <Panel defaultSize={30} minSize={10} className="bg-primary border-t border-border flex flex-col shrink-0 min-h-0">
                 <div className="h-9 bg-surface border-b border-border flex items-center justify-between px-4 shrink-0">
                   <div className="flex items-center gap-4">
                     <button
@@ -366,22 +369,23 @@ export default function Session() {
                     <span className="text-muted">Run your code to see output here.</span>
                   )}
                 </div>
-              </motion.div>
+              </Panel>
+            ) : (
+              <button
+                onClick={() => setIsConsoleOpen(true)}
+                className="h-7 bg-surface border-t border-border flex items-center justify-center text-muted hover:text-primary shrink-0 z-10"
+              >
+                <ChevronUp className="w-4 h-4" />
+                <span className="font-mono text-[10px] ml-1">Console</span>
+              </button>
             )}
-          </AnimatePresence>
-          {!isConsoleOpen && (
-            <button
-              onClick={() => setIsConsoleOpen(true)}
-              className="h-7 bg-surface border-t border-border flex items-center justify-center text-muted hover:text-primary shrink-0"
-            >
-              <ChevronUp className="w-4 h-4" />
-              <span className="font-mono text-[10px] ml-1">Console</span>
-            </button>
-          )}
-        </div>
+          </Group>
+        </Panel>
+
+        <ResizeHandle id="handle-2" />
 
         {/* ════ RIGHT PANEL: AI Tutor ════ */}
-        <div className="bg-surface border-l border-border flex flex-col h-full relative overflow-hidden">
+        <Panel defaultSize={25} minSize={20} maxSize={40} className="bg-surface flex flex-col h-full relative overflow-hidden">
           {/* Header */}
           <div className="p-4 border-b border-border shrink-0">
             <h2 className="font-display font-semibold text-primary">AI Mentor</h2>
@@ -479,9 +483,8 @@ export default function Session() {
               </button>
             </div>
           </div>
-        </div>
-
-      </div>
+        </Panel>
+      </Group>
     </div>
   );
 }

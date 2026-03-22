@@ -142,11 +142,11 @@ export default function Dashboard() {
           ) : (
             displayProblems.map((prob) => (
               <Card key={prob.id} interactive className="group relative flex flex-col justify-between min-h-[150px] overflow-hidden">
-                {'type' in prob && prob.type && (
+                {'type' in prob && prob.type ? (
                   <div className="absolute top-4 right-4">
-                    <Badge variant={prob.type as any}>{prob.type}</Badge>
+                    <Badge variant={prob.type as any}>{String(prob.type)}</Badge>
                   </div>
-                )}
+                ) : null}
                 <div className="pr-16">
                   <h3 className="font-display font-semibold text-lg text-primary group-hover:text-accent-green transition-colors">
                     {prob.title}

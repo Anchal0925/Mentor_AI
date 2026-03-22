@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import type { ReactNode } from 'react';
 import { auth as authApi, user as userApi } from '../lib/api';
 import type { UserStats, DashboardData } from '../lib/api';
 
