@@ -1,0 +1,22 @@
+# ── Web framework ─────────────────────────────────────────────
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+
+# ── Async PostgreSQL (core + behavior engine) ─────────────────
+asyncpg==0.29.0
+sqlalchemy[asyncio]==2.0.30
+
+# ── Sync SQLAlchemy (onboarding / SQLite) ─────────────────────
+# (sqlalchemy above covers both sync and async)
+
+# ── Auth / hashing ────────────────────────────────────────────
+passlib[bcrypt]==1.7.4
+
+# ── Validation / settings ─────────────────────────────────────
+pydantic[email]==2.7.1
+python-dotenv==1.0.1
+
+# ── Embeddings (optional — falls back to hash if unavailable) ─
+# torch            # uncomment for GPU/CPU inference
+# transformers     # uncomment for CodeBERT embeddings
+numpy==1.26.4
